@@ -1358,6 +1358,13 @@ public class StripeTest {
 	public void testCustomerMetadata() throws StripeException {
 		testMetadata(Customer.create(defaultCustomerParams));
 	}
+	
+	@Test
+	public void testSubscriptionMetadata() throws StripeException {
+		Plan plan = Plan.create(getUniquePlanParams());
+		Customer customer = createDefaultCustomerWithPlan(plan);
+		testMetadata(customer.getSubscriptions().getData().get(0));
+	}
 
 	@Test
 	public void testTransferMetadata() throws StripeException {
